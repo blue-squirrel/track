@@ -1,2 +1,10 @@
-import {add} from './util.js'
-add(6,9);
+class Monitor {
+  constructor(config) {
+    this.config = config;
+  }
+  run() {
+    console.log(666);
+  }
+}
+
+export default Monitor;
