@@ -35,17 +35,18 @@ class SendTracker {
     let body = JSON.stringify({
       __logs__: [log],
     });
-    this.xhr.open("POST", this.url, true);
-    this.xhr.setRequestHeader("Content-Type", "application/json");
-    this.xhr.setRequestHeader("x-log-apiversion", "1.0.0");
-    this.xhr.setRequestHeader("x-log-bodyrawsize", body.length);
-    this.xhr.onload = function () {
-      // console.log(this.xhr.response);
-    };
-    this.xhr.onerror = function (error) {
-      console.log(error);
-    };
-    this.xhr.send(body);
+    // 本地调试，暂不上报
+    // this.xhr.open("POST", this.url, true);
+    // this.xhr.setRequestHeader("Content-Type", "application/json");
+    // this.xhr.setRequestHeader("x-log-apiversion", "1.0.0");
+    // this.xhr.setRequestHeader("x-log-bodyrawsize", body.length);
+    // this.xhr.onload = function () {
+    //   // console.log(this.xhr.response);
+    // };
+    // this.xhr.onerror = function (error) {
+    //   console.log(error);
+    // };
+    // this.xhr.send(body);
   }
 }
 
