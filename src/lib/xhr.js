@@ -5,13 +5,14 @@ export function injectXHR() {
 
   let oldOpen = XMLHttpRequest.prototype.open;
   XMLHttpRequest.prototype.open = function (method, url, async) {
+    console.log('请求', url)
     // 把上报接口过滤掉
     if (!url.match(/logstores/) && !url.match(/sockjs/)) {
       this.logData = { method, url, async };
     }
     return oldOpen.apply(this, arguments);
   };
-  
+
   let oldSend = XMLHttpRequest.prototype.send;
   XMLHttpRequest.prototype.send = function (body) {
     if (this.logData) {
