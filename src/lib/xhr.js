@@ -1,11 +1,11 @@
-import tracker from "../util/tracker";
+import tracker from '../util/tracker';
 
 export function injectXHR() {
   let XMLHttpRequest = window.XMLHttpRequest;
 
   let oldOpen = XMLHttpRequest.prototype.open;
   XMLHttpRequest.prototype.open = function (method, url, async) {
-    console.log('请求', url)
+    console.log('请求', url);
     // 把上报接口过滤掉
     if (!url.match(/logstores/) && !url.match(/sockjs/)) {
       this.logData = { method, url, async };
@@ -23,19 +23,19 @@ export function injectXHR() {
         let status = this.status;
         let statusText = this.statusText;
         tracker.send({
-          kind: "stability",
-          type: "xhr",
+          kind: 'stability',
+          type: 'xhr',
           eventType: type,
           pathname: this.logData.url,
-          status: status + "-" + statusText, // 状态码
+          status: status + '-' + statusText, // 状态码
           duration,
-          response: this.response ? JSON.stringify(this.response) : "", // 响应体
-          params: body || "", // 入参
+          response: this.response ? JSON.stringify(this.response) : '', // 响应体
+          params: body || '', // 入参
         });
       };
-      this.addEventListener("load", handler("load"), false);
-      this.addEventListener("error", handler, false);
-      this.addEventListener("abort", handler, false);
+      this.addEventListener('load', handler('load'), false);
+      this.addEventListener('error', handler, false);
+      this.addEventListener('abort', handler, false);
     }
     return oldSend.apply(this, arguments);
   };
